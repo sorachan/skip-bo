@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}game {{ game_id }}{% endblock %}
+
+{% block header %}
+  <h1>game view: {{ game_id }}</h1>
+{% endblock %}
+
+{% block content %}
+  <div id="game_view">
+    <div id="own_area" class="player_area"></div>
+    <p></p>
+    <div id="pile_area"></div>
+    <p></p>
+    <div id="other_players"></div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='gameview.js') }}"></script>
+{% endblock %}

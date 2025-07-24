@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}join lobby{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="game_id">game ID</label>
+    <input name="game_id" id="game_id" required>
+    <input type="submit" value="join">
+  </form>
+{% endblock %}
+

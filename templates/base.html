@@ -1,0 +1,18 @@
+<!doctype html>
+<title>Skip-Bo – {% block title %}{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<nav>
+  <h1>Skip-Bo</h1>
+  <ul>
+    <li><a href="{{ url_for('main.bp_main_page') }}">main page</a>
+    <li><a href="{{ url_for('new_game.bp_new_game') }}">new game</a>
+    <li><a href="{{ url_for('join_game.bp_join_game') }}">join lobby</a>
+  </ul>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% block content %}{% endblock %}
+</section>
+{% block script %}{% endblock %}

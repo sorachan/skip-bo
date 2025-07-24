@@ -1,0 +1,242 @@
+html { font-family: sans-serif; background: #eee; padding: 1rem; }
+body { max-width: 960px; margin: 0 auto; background: white; }
+h1 { font-family: serif; color: #377ba8; margin: 1rem 0; }
+a { color: #377ba8; }
+hr { border: none; border-top: 1px solid lightgray; }
+nav { background: lightgray; display: flex; align-items: center; padding: 0 0.5rem; }
+nav h1 { flex: auto; margin: 0; }
+nav h1 a { text-decoration: none; padding: 0.25rem 0.5rem; }
+nav ul  { display: flex; list-style: none; margin: 0; padding: 0; }
+nav ul li a, nav ul li span, header .action { display: block; padding: 0.5rem; }
+.content { padding: 0 1rem 1rem; }
+.content > header { border-bottom: 1px solid lightgray; display: flex; align-items: flex-end; }
+.content > header h1 { flex: auto; margin: 1rem 0 0.25rem 0; }
+.flash { margin: 1em 0; padding: 1em; background: #cae6f6; border: 1px solid #377ba8; }
+.post > header { display: flex; align-items: flex-end; font-size: 0.85em; }
+.post > header > div:first-of-type { flex: auto; }
+.post > header h1 { font-size: 1.5em; margin-bottom: 0; }
+.post .about { color: slategray; font-style: italic; }
+.post .body { white-space: pre-line; }
+.content:last-child { margin-bottom: 0; }
+.content form { margin: 1em 0; display: flex; flex-direction: column; }
+.content label { font-weight: bold; margin-bottom: 0.5em; }
+.content input, .content textarea { margin-bottom: 1em; }
+.content textarea { min-height: 12em; resize: vertical; }
+input.danger { color: #cc2f2e; }
+input[type=submit] { align-self: start; min-width: 10em; }
+
+#player_list li div {
+    display: inline;
+}
+
+#edit_button {
+    margin-left: 1ex;
+}
+
+#is_host {
+    margin-right: 1ex;
+}
+
+#game_view {
+    background: darkgreen;
+    box-shadow: inset rgba(0,0,0,.5) 0 0 200px;
+    width: 95vmin;
+    height: 50vmin;
+}
+
+#deck_size, .player_pile_size {
+    color: white;
+    background: darkgray;
+    display: inline-block;
+    margin-left: 0.5vmin;
+    padding: 0.25vmin;
+    border-radius: 0.25vmin;
+    position: relative;
+    bottom: 3.75vmin;
+}
+
+.player_name {
+    text-align: center;
+    color: white;
+    font-size: 2vmin;
+}
+
+#pile_area, .player_area, .player_pile, .player_hand, .player_temp {
+    border: 0.5vmin solid white;
+    display: inline-block;
+    border-radius: 0.5vmin;
+    margin: 0.5vmin;
+}
+
+.card {
+    display: inline-block;
+    /*position: absolute;
+    z-index: 100;*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    /*-webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;*/
+    /*-webkit-transition: transform 1s;
+    transition: transform 1s;
+    -ms-transform: rotateY(180deg);
+    transform: rotateY(180deg);*/
+    /*color: transparent;*/
+    /*background: red;*/
+    border-radius: 0.5vmin;
+    /*box-shadow: inset darkred 0 0 50px, rgba(0,0,0,1) 0 0 1px, rgba(0,0,0,.05) 0 10px 10.5vmin;*/
+    border: 0.5vmin solid white;
+    margin: 0.5vmin 0.25vmin;
+    padding: 0;
+    width: 5vmin;
+    height: 7.5vmin;
+    color: white;
+    position: relative;
+}
+
+.player_hand .card:first-child {
+    margin-left: 0.5vmin;
+}
+
+.player_hand .card:last-child {
+    margin-right: 0.5vmin;
+}
+
+.player_pile .card {
+    margin: 0.5vmin;
+}
+
+.card h2 {
+    /*margin: .75em 0;*/
+    /* margin: .25em 0; */
+    margin: 0;
+    font-size: 2.5vmin;
+    /*line-height: 3vmin;
+    text-align: center;*/
+    pointer-events: none;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.card h3 {
+    /*display: inline;*/
+    font-size: 1.5vmin;
+    margin: 0.25vmin;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.player_temp .dummy:first-child {
+    margin-left: 0.5vmin;
+}
+
+.player_temp .dummy:last-child {
+    margin-right: 0.5vmin;
+}
+
+/*.temp_pile:not(.card) {
+    display: inline-block;
+    position: relative;
+    height: 7.5vmin;
+    width: 5vmin;
+    border: solid 0.5vmin darkgray;
+    border-radius: 0.5vmin;
+    margin: 0.5vmin 0.25vmin;
+}*/
+
+.temp_pile.card:not(.dummy) {
+    position: absolute;
+    left: -0.6vmin;
+    top: -0.95vmin;
+    /*left: calc(-0.25vmin - 0.5vmin);
+    top: calc(-0.5vmin - 0.5vmin);*/
+}
+
+.temp_pile.card.dummy {
+    position: relative;
+}
+
+.card[data-colour=orange] {
+    background: orange;
+}
+
+.card[data-colour=blue] {
+    background: blue;
+}
+
+.card[data-colour=green] {
+    background: green;
+}
+
+.card[data-colour=red] {
+    background: red;
+}
+
+.card[data-colour=darkgreen] {
+    background: darkgreen;
+}
+
+.card[selected] {
+    border: 0.5vmin solid yellow;
+}
+
+.card[flipped] {
+    display: inline-block;
+    /*position: absolute;
+    z-index: 100;*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    /*-webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;*/
+    /*-webkit-transition: transform 1s;
+    transition: transform 1s;
+    -ms-transform: rotateY(180deg);
+    transform: rotateY(180deg);*/
+    color: transparent;
+    background: red;
+    border-radius: 0.5vmin;
+    box-shadow: inset darkred 0 0 50px, rgba(0,0,0,1) 0 0 1px, rgba(0,0,0,.05) 0 10px 10.5vmin;
+    border: 0.5vmin solid white;
+    margin: 0.5vmin 0.25vmin;
+    padding: 0;
+    /*width: 5vmin;
+    height: 7.5vmin;*/
+}
+
+#deck {
+    margin-left: 0.5vmin;
+    margin-right: 1.5vmin;
+}
+
+#pile_area .card:nth-child(3) {
+    margin-left: 0.5vmin;
+}
+
+#pile_area .card:last-child {
+    margin-right: 0.5vmin;
+}
+
+.card[flipped] {
+    cursor: unset;
+}
+
+.card[flipped] h2, .card[flipped] h3, .card.dummy h2, .card.dummy h3 {
+    visibility: hidden;
+}
+
+.player_temp .card:not(.dummy) h2, .player_temp .card:not(.dummy) h3 {
+    visibility: unset;
+}
+
+.card.dummy {
+    border: solid 0.5vmin darkgray;
+}

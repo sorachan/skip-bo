@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}lobby {{ game_id }}{% endblock %}
+
+{% block header %}
+  <h1>lobby <div style="display: inline;" id="lobby_id">{{ game_id }}</div></h1>
+{% endblock %}
+
+{% block content %}
+  <h2>players:</h2>
+  <ul id="player_list">
+  </ul>
+
+  <label for="pile_size">Pile size:</label>
+  <input type="number" id="pile_size" min="5" max="30" value="25" step="1" onchange="updatePileSize()"/>
+  <br />
+  <button id="start_game" onclick="startGame()">start game</button>
+  {% endblock %}
+
+{% block script %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='lobby.js') }}"></script>
+{% endblock %}
