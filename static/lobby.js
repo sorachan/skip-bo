@@ -20,6 +20,12 @@ const pileSizeInput = document.getElementById("pile_size");
 
 const socket = io();
 
+const shareLinkInput = document.getElementById("share_link");
+const urlTokens = window.document.URL.split("/");
+const protocol = urlTokens[0];
+const urlBase = urlTokens[2];
+shareLinkInput.value = protocol + "//" + urlBase + "/lobby/" + lobbyId;
+
 socket.on("connect", function () {
     socket.emit("register_user", {
         user_id: userId,
@@ -112,6 +118,10 @@ var startGame = async function () {
     } catch (e) {
         console.error(e);
     }
+};
+
+var copyLobbyLink = function () {
+    navigator.clipboard.writeText("/lobby/" + lobbyId);
 };
 
 socket.on("game_started", function () {

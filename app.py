@@ -379,41 +379,14 @@ def create_app():
         except Exception as e:
             print(">>>>>>", type(e), e)
 
-#    @socketio.on("start_game")
-#    def socket_start_game(json):
-#        try:
-#            user_id, lobby_id, session_id = json["user_id"], json["lobby_id"], request.sid
-#            users = game_states[lobby_id]["users"]
-#            if user_id in users:
-#                if not users[user_id]["is_host"] or not users[user_id]["session_id"] == session_id:
-#                    return
-#                emit("game_started", room=lobby_id)
-#        except Exception as e:
-#            print(">>>>>>", type(e), e)
-
     @bp_main.route("/", methods=["GET"])
     def bp_main_page():
         return render_template("main.html")
-
-#    @app.route("/lobby/register_user", methods=["POST"])
-#    def register_user():
-#        user_json = request.json
-#        if not user_json.get("user_id"):
-#            return {
-#                "success": False,
-#                "error": "JSON parameter "user_id" not set"
-#            }
-#        user_id = user_json["user_id"]
-#        return {
-#            "success": True
-#        }
 
     @app.route("/lobby/start_game", methods=["POST"])
     def app_start_game():
         try:
             request_json = request.get_json()
-#            import json
-#            print(json.dumps(request_json, indent=4))
             user_id, lobby_id, pile_size = request_json["user_id"], request_json["lobby_id"], int(request_json["pile_size"])
             game = game_states[lobby_id]
             if not game["is_lobby"]:
@@ -473,6 +446,10 @@ def create_app():
     @bp_gv.route("/<game_id>", methods=["GET"])
     def bp_game_view(game_id):
         return render_template("game_view/template.html", game_id=game_id)
+
+    @app.route("/lobby/<game_id>", methods=["GET"])
+    def app_lobby_link(game_id):
+        return render_template("lobby/template.html", game_id=game_id)
 
     app.register_blueprint(bp_main)
     app.register_blueprint(bp_new)
