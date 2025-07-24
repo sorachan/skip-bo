@@ -158,7 +158,6 @@ sched.start()
 from flask import Flask
 from flask_socketio import SocketIO, send, emit
 from flask_socketio import join_room, leave_room
-#import json
 
 from flask import (
     Blueprint, g, redirect, render_template, request, session, url_for
@@ -226,9 +225,6 @@ def create_app():
             emit("refresh_user_list", {
                 "user_dict": users
             }, room=lobby_id)
-            #emit("user_joined",
-                 #data=json.dumps({"user_id": user_id}),
-            #     to=lobby_id)
         except Exception as e:
             print(">>>>>>", type(e), e)
 
@@ -459,10 +455,6 @@ def create_app():
     return app
 
 app = create_app()
-
-#if __name__ == "__main__":
-#    from waitress import serve
-#    serve(app, host="0.0.0.0", port=8080)
 
 if __name__ == "__main__":
     app = create_app()
