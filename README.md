@@ -1,6 +1,6 @@
 # Skip-Bo
 
-# how to play
+## how to play
 
 just hit "new game" and you enter a lobby which has an ID. you are now the host.
 
@@ -10,7 +10,7 @@ the host waits for everyone to join the lobby and adjusts the player pile size (
 
 enjoy! ^-^
 
-# how to install
+## how to install
 
 just clone the repo and run the app using the web server of your choice.
 
