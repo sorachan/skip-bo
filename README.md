@@ -19,8 +19,11 @@ if you're using gunicorn as the web server, you can use my config:
     gunicorn --worker-class eventlet -w 1 app:app --bind 0.0.0.0:8000
 
 note that you need to `pip install`:
-* `gunicorn`
-* `eventlet`
-* `APScheduler`
-* `Flask`
-* `flask-socketio`
+* for Skip-Bo:
+  * `APScheduler`
+  * `Flask`
+  * `flask-socketio`
+* for gunicorn:
+  * `gunicorn`
+  * `eventlet`
+
