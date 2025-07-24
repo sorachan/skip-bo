@@ -16,14 +16,6 @@ just clone the repo and run the app using the web server of your choice.
 
 if you're using gunicorn as the web server, you can use my config:
 
-gunicorn --worker-class eventlet -w 1 app:app --bind 0.0.0.0:12345
-
-# how to install
-
-just clone the repo and run the app using the web server of your choice.
-
-if you're using gunicorn as the web server, you can use my config:
-
     gunicorn --worker-class eventlet -w 1 app:app --bind 0.0.0.0:8000
 
 (note that you need to `pip install` gunicorn and eventlet.)
