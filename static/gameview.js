@@ -47,7 +47,7 @@ socket.on("game_json", function (json) {
     }
     gameState = state;
     const playerCount = state["user_map"].length;
-    gameView.style.height = "calc(32.5vmin + " + (playerCount - 1) + " * 17.5vmin)";
+    gameView.style.height = "calc(35vmin + " + (playerCount - 1) + " * 20vmin)";
     const ownArea = document.getElementById("own_area");
     ownArea.innerHTML = "";
     const ownPlayerId = gameState["own_player_id"];

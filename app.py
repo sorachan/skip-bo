@@ -184,7 +184,7 @@ def create_app():
                     if game["is_lobby"]:
                         del game["users"][user_id]
                         print(f"user {user_id}, session ID {session_id}, left lobby")
-                        if not any(users[_user_id]["is_host"] for _user_id in users):
+                        if not any(users[_user_id]["is_host"] for _user_id in users) and len(users) > 0:
                             list(users.items())[0][1]["is_host"] = True
                     else:
                         print(f"user {user_id}, session ID {session_id}, has left the game. waiting 60s for reconnect…")
