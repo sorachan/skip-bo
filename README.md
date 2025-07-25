@@ -27,3 +27,6 @@ note that you need to `pip install`:
   * `gunicorn`
   * `eventlet`
 
+## public instance
+
+if you're too lazy or inexperienced to set up your own server, feel free to play a match over at https://skipbo.dillbox.me.
