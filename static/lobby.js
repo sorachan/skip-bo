@@ -120,9 +120,22 @@ var startGame = async function () {
     }
 };
 
-var copyLobbyLink = function () {
-    navigator.clipboard.writeText("/lobby/" + lobbyId);
-};
+async function copyLobbyLink() {
+    if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(textToCopy);
+    } else {
+        shareLinkInput.select();
+
+        try {
+            document.execCommand('copy');
+        } catch (error) {
+            console.error(error);
+        }
+
+        pileSizeInput.focus();
+        pileSizeInput.blur();
+    }
+}
 
 socket.on("game_started", function () {
     window.location.href = "/game_view/" + lobbyId;

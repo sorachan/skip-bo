@@ -15,10 +15,12 @@
   <input type="number" id="pile_size" min="5" max="30" value="25" step="1" onchange="updatePileSize()"/>
   <br />
   <button id="start_game" onclick="startGame()">start game</button>
-  <!--<button id="copy_share_link" onclick="copyLobbyLink()">copy share link</button>-->
-  <br />
+  <p>
   <label for="share_link">Share link:</label>
   <input id="share_link" style="width:85%" readonly></input>
+  <br />
+  <button id="copy_share_link" onclick="copyLobbyLink()">copy share link</button>
+  </p>
   {% endblock %}
 
 {% block script %}
