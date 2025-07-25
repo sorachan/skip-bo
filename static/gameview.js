@@ -452,6 +452,7 @@ function clickTemp (e) {
                     } else {
                         if (!(expandedTemp["player"] == playerId && expandedTemp["pile"] == tempPileIndex)) {
                             expandTemp(playerId, tempPileIndex);
+                            e.target.setAttribute("selected", true);
                             selected = e.target;
                             selectedType = "temp";
                         } else {
