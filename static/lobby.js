@@ -122,7 +122,7 @@ var startGame = async function () {
 
 async function copyLobbyLink() {
     if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(textToCopy);
+        await navigator.clipboard.writeText(protocol + "//" + urlBase + "/lobby/" + lobbyId);
     } else {
         shareLinkInput.select();
 
