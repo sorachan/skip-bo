@@ -384,7 +384,13 @@ def create_app():
         try:
             request_json = request.get_json()
             user_id, lobby_id, pile_size = request_json["user_id"], request_json["lobby_id"], int(request_json["pile_size"])
-            game = game_states[lobby_id]
+            try:
+                game = game_states[lobby_id]
+            except:
+                return {
+                    "success": False,
+                    "error": "lobby ID doesn't exist (inactive games/lobbies get removed after 2h)!"
+                }
             if not game["is_lobby"]:
                 return {
                     "success": False,
