@@ -1,8 +1,7 @@
+### game logic
+
 from random import shuffle
 import uuid, time
-from apscheduler.schedulers.background import BackgroundScheduler
-
-### game logic
 
 game_states = {}
 
@@ -143,6 +142,8 @@ def end_turn(game_id: str, hand_idx: int, temp_idx: int) -> None:
     draw(game_id, game["turn"])
 
 ### remove finished or timed-out (>48h) games every hour
+
+from apscheduler.schedulers.background import BackgroundScheduler
 
 def clean_up():
     for game_id, game in game_states.items():
