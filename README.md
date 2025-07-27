@@ -27,6 +27,25 @@ note that you need to `pip install`:
   * `gunicorn`
   * `eventlet`
 
+### HTTPS
+
+if you want the game to run on an HTTPS domain, you need to configure your web server (Apache, Nginx etc.) to run a reverse proxy to the port that Skip-Bo runs on and you might not want to export that port to the internet, in which case you'd need to change the `--bind` IP from `0.0.0.0` to `127.0.0.1`.
+
+of course, HTTPS requires getting a SSL certificate first – if you're looking for a free and reliable certificate service, I warmly recommend Let's Encrypt.
+
+for example, if you run `gunicorn` with the argument `--bind 127.0.0.1:8000`, you can set up your web server to reverse proxy connections to `skipbo.foob.ar` to `127.0.0.1:8000` and configure it to not only proxy HTTP(S) requests, but also WebSocket.
+
+that's it, at least in theory. in practice, setting up a reverse proxy that supports WS is a major pain in the arse and I just couldn't get it to run when `gunicorn` was serving HTTP, but I did end up getting it to work using a rather ugly hack:
+
+* configuring `gunicorn` to serve HTTPS as well by adding the `--certfile=<file>` and `--keyfile=<file>` parameters using the same cert files as Apache
+  * note that the server should **NOT** ‼️ run as `root`, so you need to tweak the permissions for the key file
+  * in my example, I changed the group of the respective directories and files to the `skipbo` user group and set `chmod g+r` for the key file and `chmod g+x` for the directories
+* adding `SSLProxyEngine On` to my Apache config
+* routing `skipbo.foob.ar` to `127.0.0.1` in my `/etc/hosts`
+* proxying `/socket.io` to `wss://skipbo.foob.ar:8000`
+
+I know this setup is ugly AF so if someone can point me to a working Apache reverse proxy configuration that doesn't require `gunicorn` to serve HTTPS, please open an issue and let me know.
+
 ## public instance
 
 if you're too lazy or inexperienced to set up your own server, feel free to play a match over at https://skipbo.dillbox.me.
