@@ -31,6 +31,8 @@ note that you need to `pip install`:
 
 if you want the game to run on an HTTPS domain, you need to configure your web server (Apache, Nginx etc.) to run a reverse proxy to the port that Skip-Bo runs on and you might not want to export that port to the internet, in which case you'd need to change the `--bind` IP from `0.0.0.0` to `127.0.0.1`.
 
+(that is, if you're serving other web sites on your server. if all you're looking to serve is Skip-Bo, just configure `gunicorn` to serve HTTPS on port 443 and ignore the rest of this subsection.)
+
 of course, HTTPS requires getting a SSL certificate first – if you're looking for a free and reliable certificate service, I warmly recommend Let's Encrypt.
 
 for example, if you run `gunicorn` with the argument `--bind 127.0.0.1:8000`, you can set up your web server to reverse proxy connections to `skipbo.foob.ar` to `127.0.0.1:8000` and configure it to not only proxy HTTP(S) requests, but also WebSocket.
