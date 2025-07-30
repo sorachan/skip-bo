@@ -448,10 +448,18 @@ def create_app():
 
     @bp_gv.route("/<game_id>", methods=["GET"])
     def bp_game_view(game_id):
+        if game_id not in game_states:
+            return render_template("join_game/invalid.html")
+        if game_states[game_id]["is_lobby"]:
+            return render_template("lobby/template.html", game_id=game_id)
         return render_template("game_view/template.html", game_id=game_id)
 
     @app.route("/lobby/<game_id>", methods=["GET"])
     def app_lobby_link(game_id):
+        if game_id not in game_states:
+            return render_template("join_game/invalid.html")
+        if not game_states[game_id]["is_lobby"]:
+            return render_template("join_game/running.html", game_id=game_id)
         return render_template("lobby/template.html", game_id=game_id)
 
     app.register_blueprint(bp_main)
