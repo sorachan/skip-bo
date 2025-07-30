@@ -54,7 +54,10 @@ def draw(game_id: str, player: int):
     game["last_activity"] = time.time()
     while len(game[player]["hand"]) < 5:
         if not game["deck"]:
-            game["deck"] = game["used"]
+            if game["used"]:
+                game["deck"] = game["used"]
+            else:
+                game["deck"] = 2 * list(range(1, 13)) + 13 * ["*"]
             game["used"] = []
             shuffle(game["deck"])
         game[player]["hand"] += [game["deck"].pop()]
