@@ -144,20 +144,28 @@ def end_turn(game_id: str, hand_idx: int, temp_idx: int) -> None:
     game["turn"] = (game["turn"] + 1) % game["player_count"]
     draw(game_id, game["turn"])
 
-### remove finished or timed-out (>48h) games every hour
+### remove finished or timed-out (>48h) games every hour; save games every 10 seconds
 
 from apscheduler.schedulers.background import BackgroundScheduler
+import pickle
 
 def clean_up():
     for game_id, game in game_states.items():
         if game.get("winner") != None or time.time() - game["last_activity"] > 2 * 24 * 60 * 60:
             del game_states[game_id]
 
+def save_games():
+    with open("games.pickle", "wb") as file:
+        pickle.dump(game_states, file, pickle.HIGHEST_PROTOCOL)
+
 sched = BackgroundScheduler(daemon=True)
 sched.add_job(clean_up, "interval", minutes=60)
+sched.add_job(save_games, "interval", seconds=5)
 sched.start()
 
 ### web server functionality
+
+import os
 
 from flask import Flask
 from flask_socketio import SocketIO, send, emit
@@ -170,6 +178,15 @@ from flask import (
 socketio = SocketIO(engineio_logger=True, logger=True)
 
 def create_app():
+    global game_states
+
+    if os.path.exists("games.pickle"):
+        try:
+            with open("games.pickle", "rb") as file:
+                game_states = pickle.load(file)
+        except:
+            pass
+
     app = Flask(__name__)
     bp_main = Blueprint("main", __name__)
     bp_new = Blueprint("new_game", __name__, url_prefix="/new_game")
