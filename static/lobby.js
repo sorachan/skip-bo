@@ -39,7 +39,14 @@ var updateDisplayName = function (newName) {
         lobby_id: lobbyId,
         new_name: newName
     });
+    localStorage["display_name"] = newName;
 };
+
+const preferredDisplayName = localStorage["display_name"];
+
+if (preferredDisplayName) {
+    updateDisplayName(preferredDisplayName);
+}
 
 var updatePileSize = function () {
     socket.emit("update_pile_size", {
