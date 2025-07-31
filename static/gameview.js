@@ -411,7 +411,7 @@ function collapseTemp (player, pile) {
     const tempPileCards = tempPile.children;
     for (var i = 0; i < tempPileCards.length; i++) {
         const tempPileCard = tempPileCards[i];
-        tempPileCard.removeAttribute("style");
+        tempPileCard.style.removeProperty("top");
     }
     expandedTemp = {
         player: null,
