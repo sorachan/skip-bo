@@ -144,7 +144,7 @@ def end_turn(game_id: str, hand_idx: int, temp_idx: int) -> None:
     game["turn"] = (game["turn"] + 1) % game["player_count"]
     draw(game_id, game["turn"])
 
-### remove finished or timed-out (>48h) games every hour; save games every 10 seconds
+### remove finished or timed-out (>48h) games every hour; save games every 5 seconds
 
 from apscheduler.schedulers.background import BackgroundScheduler
 import pickle
