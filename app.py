@@ -57,7 +57,7 @@ def draw(game_id: str, player: int):
             if game["used"]:
                 game["deck"] = game["used"]
             else:
-                game["deck"] = 2 * list(range(1, 13)) + 13 * ["*"]
+                game["deck"] = 2 * list(range(1, 13)) + 3 * ["*"]
             game["used"] = []
             shuffle(game["deck"])
         game[player]["hand"] += [game["deck"].pop()]
