@@ -424,7 +424,6 @@ def create_app():
                 }
             emit("game_started", room=lobby_id, namespace="/")
             new_game(pile_size, lobby_id)
-            print(game)
             return {
                 "success": True
             }
