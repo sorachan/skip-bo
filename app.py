@@ -304,8 +304,7 @@ def create_app():
                 json_state["users"] = {
                     _user_id: {
                         "display_name": users[_user_id]["display_name"],
-                        "online": users[_user_id]["online"],
-                        "timed_out": users[_user_id]["timed_out"]
+                        "online": users[_user_id]["online"]
                     } for _user_id in users
                 }
                 json_state["user_map"] = [key for key, item in list(users.items())]
@@ -329,7 +328,6 @@ def create_app():
                 if _user_id == user_id:
                     users[user_id]["session_id"] = session_id
                     users[user_id]["online"] = True
-                    users[user_id]["timed_out"] = False
             emit("user_joined", {
                 "user_id": user_id
             }, room=game_id)
