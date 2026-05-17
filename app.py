@@ -135,12 +135,8 @@ def end_turn(game_id: str, hand_idx: int, temp_idx: int) -> None:
     player = game["turn"]
     if hand_idx not in range(0, len(game[player]["hand"])):
         return
-    print("playing hand idx", hand_idx, "to pile idx", temp_idx)
     game[player]["temp"][temp_idx] += [game[player]["hand"][hand_idx]]
-    print("old hand,", game[player]["hand"])
     del game[player]["hand"][hand_idx]
-    print("new hand,", game[player]["hand"])
-    print("new pile state", game[player]["temp"][temp_idx])
     game["turn"] = (game["turn"] + 1) % game["player_count"]
     draw(game_id, game["turn"])
 
